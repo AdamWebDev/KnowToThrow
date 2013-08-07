@@ -293,10 +293,11 @@ add_action('wp_enqueue_scripts','aw_gb_enqueue_scripts');
 
 function aw_gb_show_garbage_form($atts) {
 
-  $output = '';
+  $output = '<div class="ktw-search-input">';
   $output.= '<input type="text" name="searchKeyword" id="searchKeyword" placeholder="Search...">';
-  $output.='<input type="submit" value="Search!" id="submitSearch" class="btn">';
-  $output.="<div id='results'></div>";
+  $output.= '<input type="submit" value="Search!" id="submitSearch" class="btn">';
+  $output.= '</div>';
+  $output.= '<div id="results" class="ktw-results"></div>';
   return $output;
 }
 add_shortcode('know-to-throw','aw_gb_show_garbage_form');
@@ -310,11 +311,14 @@ function aw_gb_do_search() {
     $output = '';
     if(count($results)>0) {
       if(count($results)==50) {
-        $output.="<p>Yikes! It looks like there's a lot of matches to your search... try to be a bit more specific!</p>";
+        $output.='<div class="ktw-many-results"><p>Yikes! It looks like there\'s a lot of matches for "'.$search.'." Try to be a bit more specific!</p><p>Here\'s the first 50.</p></div>';
       }
-      $output.= '<ul id="KnowToThrow">';
+      else {
+        $output.='<div class="ktw-results-count">We found ' . count($results) . ' matches for "' . $search . '".</div>';
+      }
+      $output.= '<ul id="KnowToThrow" class="ktw-results-list">';
       foreach($results as $result) {
-        $output.="<li class='clearfix'><div class='img'><img src='". WP_AW_GB_URL ."/img/icon_garbage.jpg' alt='$result->method'></div><div class='summary'><strong>$result->item</strong></p><p>$result->notes</p></div><div class='link'><a href='$result->url'>More information on $result->method</a></div></li>";
+        $output.="<li class='clearfix'><div class='ktw-image'><img src='". WP_AW_GB_URL ."/img/icon_garbage.jpg' alt='$result->method'></div><div class='ktw-summary'><strong>". stripslashes($result->item) ."</strong></p><p>". stripcslashes($result->notes) ."</p></div><div class='ktw-link'><a href='$result->url'>More information on $result->method</a></div></li>";
         
       }
       $output.= '</ul>';
@@ -322,7 +326,7 @@ function aw_gb_do_search() {
     else {
       $output.= "No results found.";
     }
-    $output.= "<p>Couldn't find what you're looking for? <a href='#'>Let us know!</a></p>";
+    $output.= '<div class="ktw-suggest"><p>Couldn\'t find what you\'re looking for? <a href="#">Let us know!</a></p></div>';
     die($output);
 }
 
