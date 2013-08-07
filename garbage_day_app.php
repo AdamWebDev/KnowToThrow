@@ -133,7 +133,6 @@ function aw_gb_settings_page() {
 
           ?>
         <h1>Garbage Day Settings</h1>
-        <p>For information, updates and detailed documentation, please visit the The <a href="http://www.tipsandtricks-hq.com/?p=2116" target="_blank">WP CSV to DB</a> plugin page</p>
           <div class="postbox">
             <h3><label for="title">Quick Usage Guide</label></h3>
             <div class="inside">
