@@ -63,10 +63,7 @@ jQuery(document).ready(function() {
                     results.html('').append(data);
                 },
                 error: function(MLHttpRequest, textStatus, errorThrown){
-                    console.log(MLHttpRequest);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                    alert("Error!");
+                    results.html('Oh no! Something\'s gone wrong! Try again in a few minutes and things should be sorted out.');
                 }
             });
         }
