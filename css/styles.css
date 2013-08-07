@@ -84,28 +84,38 @@ ul.ui-autocomplete > li > a:focus { background-color: black; color: white;}
 /* Author styles 
 ---------------------------------*/
 
-#searchKeyword {
+.ktw-search-input {
+	margin-bottom: 1em;
+}
+
+.ktw-search-input input[type=text] {
 	font-size: 1.5em;
 	padding: 0.3em;
 	width: 50%;
 }
 
-#submitSearch {
+.ktw-search-input input[type=submit] {
 	font-size: 1.5em;
 	padding: 0.36em;
 }
 
-#KnowToThrow {
+.ktw-results-list {
 	margin: 0;
+	padding: 0;
 }
-#KnowToThrow li {
+
+.ktw-results-list li {
 	border-bottom: thin solid #CCC;
 	padding: 0.8em 0;
 	list-style-type: none;
 }
 
-#KnowToThrow li .img {
+.ktw-results-list li .ktw-image {
 	float: left;
+}
+
+.ktw-suggest {
+	margin-top: 1em;
 }
 
 .clearfix:before,
