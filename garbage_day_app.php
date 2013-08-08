@@ -301,6 +301,26 @@ function aw_gb_show_garbage_form($atts) {
 }
 add_shortcode('know-to-throw','aw_gb_show_garbage_form');
 
+function aw_gb_show_garbage_categories() {
+  global $wpdb;
+  $output = '<div class="ktw-categories">';
+  $output.= '<ul class="ktw-results-list">';
+  $results = aw_gb_get_categories();
+  foreach($results as $result) {
+      $output.="<li class='clearfix'><div class='ktw-image'><img src='". WP_AW_GB_URL ."/img/icon_garbage.jpg' alt='$result->method'></div><div class='ktw-summary'><strong>".$result->name."</strong></p><p>". stripcslashes($result->notes) ."</p></div><div class='ktw-link'><a href='$result->url'>More information on $result->name</a> - $result->url</div></li>";
+  }
+  $output.= '</ul>';
+  $output.= '</div>';
+  return $output;
+}
+add_shortcode('know-to-throw-categories','aw_gb_show_garbage_categories');
+
+function aw_gb_get_categories() {
+  global $wpdb;
+  $query = "SELECT * FROM ".CAT_TABLE;
+  $results = $wpdb->get_results($query);
+  return $results;  
+}
 
 function aw_gb_do_search() {
   global $wpdb;
